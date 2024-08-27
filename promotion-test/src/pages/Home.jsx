@@ -155,16 +155,15 @@ const data = [
   },
 ];
 const Home = () => {
-  const [tableDate, setTableData] = useState([]);
+  const [tableData, setTableData] = useState([]);
   useEffect(() => {
-    setTableData(data);
-  }, [data]);
+    setTableData([...data]);
+  }, []);
 
-  console.log(tableDate);
   return (
-    <main className="flex flex-col items-center w-full h-screen px-6 bg-gray-50 gap-y-4">
-      <Header tableDate={tableDate} />
-      <Content tableDate={tableDate} />
+    <main className="flex flex-col items-center w-full h-screen px-2 md:px-6 bg-gray-50 gap-y-4">
+      <Header tableData={tableData} />
+      <Content tableData={tableData} />
     </main>
   );
 };

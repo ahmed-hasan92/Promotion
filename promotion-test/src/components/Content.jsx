@@ -1,10 +1,10 @@
 import React from "react";
 
-const Content = ({ tableDate }) => {
+const Content = ({ tableData }) => {
   return (
-    <div className="h-[500px] w-full py-1 px-2 overflow-hidden border border-stone-300 rounded-md shadow-md shadow-stone-300">
-      <div className="h-full overflow-x-scroll">
-        <table className="w-[2400px]">
+    <div className="h-[85%]  w-full py-1 px-2 overflow-hidden border border-stone-300 rounded-md shadow-md shadow-stone-300">
+      <div className="h-full py-2 overflow-x-scroll">
+        <table className="w-[2400px] h-full">
           <thead className="sticky top-0">
             <tr className="text-[0.9rem] font-bold text-stone-50 bg-green-700">
               <th className="w-[300px] py-2 px-4 text-start">Division</th>
@@ -23,7 +23,7 @@ const Content = ({ tableDate }) => {
             </tr>
           </thead>
           <tbody>
-            {tableDate.map((row, index) => (
+            {tableData.map((row, index) => (
               <tr
                 key={index}
                 className={`border-t text-[0.9rem]  ${
