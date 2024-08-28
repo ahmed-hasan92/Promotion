@@ -9,7 +9,6 @@ const Header = ({ tableData }) => {
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet("Sheet1");
 
-    // Define headers with styling
     worksheet.columns = [
       { header: "Division", key: "division", width: 20 },
       { header: "SKU Count", key: "skuCount", width: 10 },
@@ -30,7 +29,7 @@ const Header = ({ tableData }) => {
       { header: "GP%", key: "gpPercent", width: 10 },
     ];
 
-    // Add data rows
+    // Adding rows
     tableData.forEach((row) => {
       worksheet.addRow(row);
     });

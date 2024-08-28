@@ -138,6 +138,7 @@ const data = [
     gpValue: "34,874.88",
     gpPercent: "41.90%",
   },
+
   {
     division: "Grand Total",
     skuCount: 545,

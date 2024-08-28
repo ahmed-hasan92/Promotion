@@ -3,10 +3,10 @@ import React from "react";
 const Content = ({ tableData }) => {
   return (
     <div className="h-[85%]  w-full py-1 px-2 overflow-hidden border border-stone-300 rounded-md shadow-md shadow-stone-300">
-      <div className="h-full py-2 overflow-x-scroll">
+      <div className="h-full py-1 overflow-x-scroll">
         <table className="w-[2400px] h-full">
           <thead className="sticky top-0">
-            <tr className="text-[0.9rem] font-bold text-stone-50 bg-green-700">
+            <tr className="text-[0.9rem] font-bold text-stone-800 bg-neutral-100 shadow-md shadow-stone-400 border-b border-stone-50">
               <th className="w-[300px] py-2 px-4 text-start">Division</th>
               <th className="w-[150px] py-2 px-4 ">SKU Count</th>
               <th className="w-[200px] py-2 px-4">Basket Cost Regular</th>
@@ -28,8 +28,8 @@ const Content = ({ tableData }) => {
                 key={index}
                 className={`border-t text-[0.9rem]  ${
                   row.division === "Grand Total"
-                    ? "bg-green-200 font-bold  text-stone-800   "
-                    : "cursor-pointer hover:-translate-y-1.5 hover:duration-300 hover:bg-stone-100  hover:font-semibold"
+                    ? "bg-green-700 font-bold  text-stone-50   "
+                    : "cursor-pointer hover:bg-gradient-to-b from-stone-50 via-stone-100 to-stone-200   hover:shadow-md hover:shadow-stone-400 hover:text-stone-900   hover:font-semibold"
                 }`}
               >
                 <td className="w-[300px] py-2 px-4 text-start">
