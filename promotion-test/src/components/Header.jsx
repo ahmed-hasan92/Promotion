@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import ExcelJS from "exceljs";
 import { saveAs } from "file-saver";
 import logo from "../assets/saco-logo.svg";
-import { SiMicrosoftexcel } from "react-icons/si";
+
+import { MdOutlineFileDownload } from "react-icons/md";
+import DarkModeButton from "./DarkModeButton";
+import DarkMode from "../context/DarkModeContext";
 
 const Header = ({ tableData }) => {
+  const { dark } = useContext(DarkMode);
   const handleExport = async () => {
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet("Sheet1");
@@ -46,6 +50,16 @@ const Header = ({ tableData }) => {
       vertical: "center",
     };
 
+    const lastRowIndex = tableData.length + 1; // +1 because headers start at row 1
+    const lastRow = worksheet.getRow(lastRowIndex);
+    lastRow.font = { bold: true, color: { argb: "FFFFFFFF" } };
+    lastRow.fill = {
+      type: "pattern",
+      pattern: "solid",
+      fgColor: { argb: "FF366092" },
+    };
+    lastRow.alignment = { horizontal: "center", vertical: "center" };
+
     // Apply border to all cells
     worksheet.eachRow((row, rowNumber) => {
       row.eachCell((cell) => {
@@ -71,16 +85,28 @@ const Header = ({ tableData }) => {
     const buffer = await workbook.xlsx.writeBuffer();
     saveAs(new Blob([buffer]), "data_export.xlsx");
   };
-
+  // Re-organise classes structure below. Make it readable.
   return (
-    <div className="w-full h-[64px] bg-stone-100 border-b border-stone-200 shadow-md shadow-stone-500 rounded-b-3xl flex flex-row items-center px-5 justify-between">
+    <div
+      style={{ boxShadow: "0px 0px 8px 0px gray" }}
+      className={`w-full h-[64px] rounded-3xl flex flex-row items-center px-5 justify-between  ${
+        dark ? "bg-[#2c2c2c] " : "bg-stone-100 border-b border-stone-200 "
+      }`}
+    >
       <img src={logo} alt="SACO-LOGO" className="w-[100px] h-[50px]" />
-      <button
-        onClick={handleExport}
-        className="flex flex-row items-center px-3 py-2 bg-green-700 rounded-lg text-stone-200 font-semibold gap-x-2 text-[1rem] shadow-md shadow-stone-600 border border-stone-300 hover:shadow-none hover:translate-y-0.5 hover:bg-green-800 hover:duration-500"
-      >
-        Export <SiMicrosoftexcel size={22} className="text-stone-200" />
-      </button>
+      <div className="flex flex-row items-center w-auto h-auto mr-2 gap-x-4">
+        <DarkModeButton />
+        <button
+          onClick={handleExport}
+          className={`flex items-center justify-center w-[30px] h-[30px] rounded-full   shadow-md  border  hover:shadow-none hover:translate-y-0.5  hover:duration-500 ${
+            dark
+              ? "bg-[#3700B3] shadow-stone-500 text-stone-50 hover:bg-[#241152] "
+              : " bg-[#0f6cb5] shadow-stone-600 border-stone-300 hover:bg-blue-700 "
+          } `}
+        >
+          <MdOutlineFileDownload size={19} className="text-stone-50" />
+        </button>
+      </div>
     </div>
   );
 };

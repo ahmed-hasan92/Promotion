@@ -1,170 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import data from "../promotionData";
+import DarkMode from "../context/DarkModeContext";
 import Content from "../components/Content";
 import Header from "../components/Header";
-
-const data = [
-  {
-    division: "Bed & Bath",
-    skuCount: 13,
-    basketCostRegular: 35.18,
-    basketCostPromo: 35.18,
-    costVariance: "0.00%",
-    basketRSPRegular: 82.38,
-    basketRSPPromo: 75.12,
-    customerSaving: "-9.49%",
-    basketMarginRegular: 47.21,
-    basketMarginPromo: 39.94,
-    salesProjected: "83,234.78",
-    gpValue: "34,874.88",
-    gpPercent: "41.90%",
-  },
-  {
-    division: "Electrical",
-    skuCount: 13,
-    basketCostRegular: 35.18,
-    basketCostPromo: 35.18,
-    costVariance: "0.00%",
-    basketRSPRegular: 82.38,
-    basketRSPPromo: 75.12,
-    customerSaving: "-9.49%",
-    basketMarginRegular: 47.21,
-    basketMarginPromo: 39.94,
-    salesProjected: "83,234.78",
-    gpValue: "34,874.88",
-    gpPercent: "41.90%",
-  },
-  {
-    division: "Electronics/ Appliances",
-    skuCount: 13,
-    basketCostRegular: 35.18,
-    basketCostPromo: 35.18,
-    costVariance: "0.00%",
-    basketRSPRegular: 82.38,
-    basketRSPPromo: 75.12,
-    customerSaving: "-9.49%",
-    basketMarginRegular: 47.21,
-    basketMarginPromo: 39.94,
-    salesProjected: "83,234.78",
-    gpValue: "34,874.88",
-    gpPercent: "41.90%",
-  },
-  {
-    division: "Furniture",
-    skuCount: 13,
-    basketCostRegular: 35.18,
-    basketCostPromo: 35.18,
-    costVariance: "0.00%",
-    basketRSPRegular: 82.38,
-    basketRSPPromo: 75.12,
-    customerSaving: "-9.49%",
-    basketMarginRegular: 47.21,
-    basketMarginPromo: 39.94,
-    salesProjected: "83,234.78",
-    gpValue: "34,874.88",
-    gpPercent: "41.90%",
-  },
-  {
-    division: "Hardware",
-    skuCount: 13,
-    basketCostRegular: 35.18,
-    basketCostPromo: 35.18,
-    costVariance: "0.00%",
-    basketRSPRegular: 82.38,
-    basketRSPPromo: 75.12,
-    customerSaving: "-9.49%",
-    basketMarginRegular: 47.21,
-    basketMarginPromo: 39.94,
-    salesProjected: "83,234.78",
-    gpValue: "34,874.88",
-    gpPercent: "41.90%",
-  },
-  {
-    division: "HarHome Finishingdware",
-    skuCount: 13,
-    basketCostRegular: 35.18,
-    basketCostPromo: 35.18,
-    costVariance: "0.00%",
-    basketRSPRegular: 82.38,
-    basketRSPPromo: 75.12,
-    customerSaving: "-9.49%",
-    basketMarginRegular: 47.21,
-    basketMarginPromo: 39.94,
-    salesProjected: "83,234.78",
-    gpValue: "34,874.88",
-    gpPercent: "41.90%",
-  },
-  {
-    division: "Houseware",
-    skuCount: 13,
-    basketCostRegular: 35.18,
-    basketCostPromo: 35.18,
-    costVariance: "0.00%",
-    basketRSPRegular: 82.38,
-    basketRSPPromo: 75.12,
-    customerSaving: "-9.49%",
-    basketMarginRegular: 47.21,
-    basketMarginPromo: 39.94,
-    salesProjected: "83,234.78",
-    gpValue: "34,874.88",
-    gpPercent: "41.90%",
-  },
-  {
-    division: "Outdoor Living",
-    skuCount: 13,
-    basketCostRegular: 35.18,
-    basketCostPromo: 35.18,
-    costVariance: "0.00%",
-    basketRSPRegular: 82.38,
-    basketRSPPromo: 75.12,
-    customerSaving: "-9.49%",
-    basketMarginRegular: 47.21,
-    basketMarginPromo: 39.94,
-    salesProjected: "83,234.78",
-    gpValue: "34,874.88",
-    gpPercent: "41.90%",
-  },
-  {
-    division: "Sports Equipment",
-    skuCount: 13,
-    basketCostRegular: 35.18,
-    basketCostPromo: 35.18,
-    costVariance: "0.00%",
-    basketRSPRegular: 82.38,
-    basketRSPPromo: 75.12,
-    customerSaving: "-9.49%",
-    basketMarginRegular: 47.21,
-    basketMarginPromo: 39.94,
-    salesProjected: "83,234.78",
-    gpValue: "34,874.88",
-    gpPercent: "41.90%",
-  },
-
-  {
-    division: "Grand Total",
-    skuCount: 545,
-    basketCostRegular: 272.37,
-    basketCostPromo: 233.18,
-    costVariance: "-4.97%",
-    basketRSPRegular: 493.04,
-    basketRSPPromo: 381.3,
-    customerSaving: "-17.85%",
-    basketMarginRegular: 220.67,
-    basketMarginPromo: 148.12,
-    salesProjected: "21,174,279.13",
-    gpValue: "6,076,324.18",
-    gpPercent: "28.70%",
-  },
-];
 const Home = () => {
-  const [tableData, setTableData] = useState([]);
+  // This template has been approved.
+  const [myData, setMyData] = useState([]);
+  const { dark } = useContext(DarkMode);
+
   useEffect(() => {
-    setTableData([...data]);
+    data ? setMyData([...data]) : setMyData([]);
   }, []);
 
   return (
-    <main className="flex flex-col items-center w-full h-screen px-2 md:px-6 bg-gray-50 gap-y-4">
-      <Header tableData={tableData} />
-      <Content tableData={tableData} />
+    <main
+      className={`flex flex-col items-center w-full h-screen px-2 md:px-6 py-2 gap-y-4 ${
+        dark ? "bg-[#121212]" : "bg-gray-50 "
+      }`}
+    >
+      <Header tableData={myData} />
+      <Content tableData={myData} />
     </main>
   );
 };
